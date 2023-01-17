@@ -1,5 +1,7 @@
 package com.bluetech.pedro.andrade.MyNotepad.dtos;
 
+import com.bluetech.pedro.andrade.MyNotepad.models.Note;
+
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,6 +21,12 @@ public class NoteDTO implements Serializable {
         this.id = id;
         this.text = text;
         this.date = date;
+    }
+
+    public NoteDTO(Note model) {
+        this.id = model.getId();
+        this.text = model.getText();
+        this.date = model.getDate();
     }
 
     public Long getId() {
