@@ -5,6 +5,7 @@ import com.bluetech.pedro.andrade.MyNotepad.models.Contact;
 import com.bluetech.pedro.andrade.MyNotepad.repositories.ContactRepository;
 import com.bluetech.pedro.andrade.MyNotepad.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,15 @@ public class ContactService {
             entity = contactRepository.save(entity);
             return new ContactDTO(entity);
         } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found: " + id);
+        }
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        try {
+            contactRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Id not found: " + id);
         }
     }

@@ -39,4 +39,9 @@ public class ContactController {
         return ResponseEntity.ok().body(contactDTO);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        contactService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
