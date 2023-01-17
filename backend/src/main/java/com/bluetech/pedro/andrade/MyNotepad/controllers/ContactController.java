@@ -32,4 +32,11 @@ public class ContactController {
         Page<ContactDTO> contactDTOPage = contactService.getAllContactsPage(pageable);
         return ResponseEntity.ok().body(contactDTOPage);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ContactDTO> updateContact(@PathVariable Long id, @Valid @RequestBody ContactDTO contactDTO) {
+        contactDTO = contactService.updateContact(id, contactDTO);
+        return ResponseEntity.ok().body(contactDTO);
+    }
+
 }
