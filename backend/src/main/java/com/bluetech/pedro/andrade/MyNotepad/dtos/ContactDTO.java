@@ -4,8 +4,6 @@ import com.bluetech.pedro.andrade.MyNotepad.models.Contact;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ContactDTO implements Serializable {
     private static final long serialVersionUID = 1L;
