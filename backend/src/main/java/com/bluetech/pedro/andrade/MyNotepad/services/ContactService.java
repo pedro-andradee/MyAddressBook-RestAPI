@@ -46,7 +46,7 @@ public class ContactService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void deleteContact(Long id) {
         try {
             contactRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {

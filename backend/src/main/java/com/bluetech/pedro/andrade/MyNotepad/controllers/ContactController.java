@@ -40,8 +40,8 @@ public class ContactController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        contactService.delete(id);
+    public ResponseEntity<Void> deleteContact(@PathVariable Long id) {
+        contactService.deleteContact(id);
         return ResponseEntity.noContent().build();
     }
 }
