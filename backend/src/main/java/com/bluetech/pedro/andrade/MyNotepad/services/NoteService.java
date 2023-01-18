@@ -5,6 +5,7 @@ import com.bluetech.pedro.andrade.MyNotepad.models.Note;
 import com.bluetech.pedro.andrade.MyNotepad.repositories.NoteRepository;
 import com.bluetech.pedro.andrade.MyNotepad.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,14 @@ public class NoteService {
         }
     }
 
-
+    @Transactional
+    public void deleteNote(Long id) {
+        try {
+            noteRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Id not found: " + id);
+        }
+    }
 
     private void copyDtoToEntity(NoteDTO noteDTO, Note entity) {
         entity.setText(noteDTO.getText());
