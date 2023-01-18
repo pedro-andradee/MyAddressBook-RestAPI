@@ -32,4 +32,10 @@ public class NoteController {
         Page<NoteDTO> noteDTOPage = noteService.getAllContactsPage(pageable);
         return ResponseEntity.ok().body(noteDTOPage);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<NoteDTO> updateNote(@PathVariable Long id, @Valid @RequestBody NoteDTO noteDTO) {
+        noteDTO = noteService.updateNote(id, noteDTO);
+        return ResponseEntity.ok().body(noteDTO);
+    }
 }

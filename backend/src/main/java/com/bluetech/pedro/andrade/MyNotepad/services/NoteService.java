@@ -3,11 +3,14 @@ package com.bluetech.pedro.andrade.MyNotepad.services;
 import com.bluetech.pedro.andrade.MyNotepad.dtos.NoteDTO;
 import com.bluetech.pedro.andrade.MyNotepad.models.Note;
 import com.bluetech.pedro.andrade.MyNotepad.repositories.NoteRepository;
+import com.bluetech.pedro.andrade.MyNotepad.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class NoteService {
@@ -28,6 +31,20 @@ public class NoteService {
         Page<Note> page = noteRepository.findAll(pageable);
         return page.map(NoteDTO::new);
     }
+
+    @Transactional
+    public NoteDTO updateNote(Long id, NoteDTO noteDTO) {
+        try {
+            Note entity = noteRepository.getReferenceById(id);
+            copyDtoToEntity(noteDTO, entity);
+            entity = noteRepository.save(entity);
+            return new NoteDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found: " + id);
+        }
+    }
+
+
 
     private void copyDtoToEntity(NoteDTO noteDTO, Note entity) {
         entity.setText(noteDTO.getText());
