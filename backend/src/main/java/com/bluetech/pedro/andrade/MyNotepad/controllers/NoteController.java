@@ -28,8 +28,9 @@ public class NoteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<NoteDTO>> getAllNotesPage(Pageable pageable) {
-        Page<NoteDTO> noteDTOPage = noteService.getAllContactsPage(pageable);
+    public ResponseEntity<Page<NoteDTO>> getAllNotesPageByDate(@RequestParam (value = "date",
+            required = false) String date, Pageable pageable) {
+        Page<NoteDTO> noteDTOPage = noteService.getAllNotesPageByDate(date, pageable);
         return ResponseEntity.ok().body(noteDTOPage);
     }
 

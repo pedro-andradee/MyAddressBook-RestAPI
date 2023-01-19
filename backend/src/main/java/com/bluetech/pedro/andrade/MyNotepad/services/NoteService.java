@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Service
 public class NoteService {
@@ -28,8 +31,14 @@ public class NoteService {
     }
 
     @Transactional(readOnly = true)
-    public Page<NoteDTO> getAllContactsPage(Pageable pageable) {
-        Page<Note> page = noteRepository.findAll(pageable);
+    public Page<NoteDTO> getAllNotesPageByDate(String date, Pageable pageable) {
+        LocalDate searchDate;
+        if(date != null) {
+            searchDate = LocalDate.parse(date);
+        } else {
+            searchDate = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+        }
+        Page<Note> page = noteRepository.findByDate(searchDate, pageable);
         return page.map(NoteDTO::new);
     }
 
