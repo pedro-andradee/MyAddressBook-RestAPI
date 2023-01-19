@@ -28,8 +28,14 @@ public class ContactService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ContactDTO> getAllContactsPage(Pageable pageable) {
-        Page<Contact> page = contactRepository.findAll(pageable);
+    public Page<ContactDTO> getAllContactsPageOrderByName(Pageable pageable) {
+        Page<Contact> page = contactRepository.findByOrderByName(pageable);
+        return page.map(ContactDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ContactDTO> getAllContactsNameContainingOrderByName(String name, Pageable pageable) {
+        Page<Contact> page = contactRepository.findByNameContainingOrderByName(name, pageable);
         return page.map(ContactDTO::new);
     }
 

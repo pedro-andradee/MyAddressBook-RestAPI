@@ -28,8 +28,14 @@ public class ContactController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ContactDTO>> getAllContactsPage(Pageable pageable) {
-        Page<ContactDTO> contactDTOPage = contactService.getAllContactsPage(pageable);
+    public ResponseEntity<Page<ContactDTO>> getAllContactsPage(@RequestParam (value = "name",
+            required = false) String name, Pageable pageable) {
+        Page<ContactDTO> contactDTOPage;
+        if(name != null) {
+            contactDTOPage = contactService.getAllContactsNameContainingOrderByName(name, pageable);
+        } else {
+            contactDTOPage = contactService.getAllContactsPageOrderByName(pageable);
+        }
         return ResponseEntity.ok().body(contactDTOPage);
     }
 
