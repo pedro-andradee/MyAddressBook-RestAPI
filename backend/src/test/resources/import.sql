@@ -4,6 +4,7 @@ INSERT INTO tb_contact (email, name, phone_number) values ('arthur@gmail.com', '
 INSERT INTO tb_contact (email, name, phone_number) values ('rodrigo@gmail.com', 'Rodrigo Costa', '81997532311');
 INSERT INTO tb_contact (email, name, phone_number) values ('carmen@gmail.com', 'Carmen Miranda', '81990588367');
 INSERT INTO tb_contact (email, name, phone_number) values ('amanda@gmail.com', 'Amanda Rego', '81993552299');
+INSERT INTO tb_contact (email, name, phone_number) values ('amelia@gmail.com', 'Amélia Bezerra', '81993576621');
 INSERT INTO tb_contact (email, name, phone_number) values ('gabriela@gmail.com', 'Gabriela Souza', '81993552977');
 
 INSERT INTO tb_note (date, text) values ('2023-01-17', 'Estudar Vue.js');
