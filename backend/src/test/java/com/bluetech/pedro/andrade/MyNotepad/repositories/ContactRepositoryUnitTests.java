@@ -43,7 +43,6 @@ public class ContactRepositoryUnitTests {
     @Test
     public void findByNameContainingOrderByNameShouldReturnEmptyPageWhenDoesNotContainName() {
         Page<Contact> page = contactRepository.findByNameContainingOrderByName("Juscelino", pageable);
-        List<Contact> contactList = page.getContent();
-        Assertions.assertTrue(contactList.isEmpty());
+        Assertions.assertTrue(page.isEmpty());
     }
 }
