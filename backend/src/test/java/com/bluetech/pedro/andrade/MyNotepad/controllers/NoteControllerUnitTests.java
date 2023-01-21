@@ -38,7 +38,7 @@ public class NoteControllerUnitTests {
 
     @Autowired
     private ObjectMapper objectMapper;
-    
+
     private NoteDTO noteDTO;
     private String todayDateWhenNoRequestParam;
     private String dateRequestParam;

@@ -56,7 +56,7 @@ public class NoteServiceUnitTests {
         existingId = 1L;
         nonExistingId = 2L;
 
-        when(noteRepository.save(ArgumentMatchers.any())).thenReturn(note);
+        when(noteRepository.save(ArgumentMatchers.any(Note.class))).thenReturn(note);
         when(noteRepository.findByDate(dateWithDataPersisted, pageable)).thenReturn(nonEmptyPage);
         when(noteRepository.findByDate(dateWithoutDataPersisted, pageable)).thenReturn(emptyPage);
         when(noteRepository.getReferenceById(existingId)).thenReturn(note);

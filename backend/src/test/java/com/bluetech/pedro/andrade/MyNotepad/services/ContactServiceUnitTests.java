@@ -55,7 +55,7 @@ public class ContactServiceUnitTests {
         existingId = 1L;
         nonExistingId = 2L;
 
-        when(contactRepository.save(ArgumentMatchers.any())).thenReturn(contact);
+        when(contactRepository.save(ArgumentMatchers.any(Contact.class))).thenReturn(contact);
         when(contactRepository.findByOrderByName(pageable)).thenReturn(nonEmptyPage);
         when(contactRepository.findByNameContainingOrderByName(namePersistedDB, pageable)).thenReturn(nonEmptyPage);
         when(contactRepository.findByNameContainingOrderByName(nameNotPersistedDB, pageable)).thenReturn(emptyPage);

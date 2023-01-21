@@ -56,14 +56,14 @@ public class ContactControllerUnitTests {
         existingId = 1L;
         nonExistingId = 2L;
 
-        when(contactService.insertNewContact(any())).thenReturn(contactDTO);
+        when(contactService.insertNewContact(any(ContactDTO.class))).thenReturn(contactDTO);
         when(contactService.getAllContactsPageOrderByName(pageable)).thenReturn(nonEmptyPage);
         when(contactService.getAllContactsNameContainingOrderByName(namePersistedDB, pageable))
                 .thenReturn(nonEmptyPage);
         when(contactService.getAllContactsNameContainingOrderByName(nameNotPersistedDB, pageable))
                 .thenReturn(emptyPage);
-        when(contactService.updateContact(eq(existingId), any())).thenReturn(contactDTO);
-        when(contactService.updateContact(eq(nonExistingId), any())).thenThrow(ResourceNotFoundException.class);
+        when(contactService.updateContact(eq(existingId), any(ContactDTO.class))).thenReturn(contactDTO);
+        when(contactService.updateContact(eq(nonExistingId), any(ContactDTO.class))).thenThrow(ResourceNotFoundException.class);
         doNothing().when(contactService).deleteContact(existingId);
         doThrow(ResourceNotFoundException.class).when(contactService).deleteContact(nonExistingId);
     }
@@ -111,7 +111,7 @@ public class ContactControllerUnitTests {
     }
 
     @Test
-    void updateContact_ShouldReturnIsOk_WhenIdExists() throws Exception {
+    public void updateContact_ShouldReturnIsOk_WhenIdExists() throws Exception {
         String jsonBody = objectMapper.writeValueAsString(contactDTO);
 
         ResultActions result = mockMvc.perform(put("/contacts/{id}", existingId)
@@ -127,7 +127,7 @@ public class ContactControllerUnitTests {
     }
 
     @Test
-    void updateContact_ShouldReturnNotFound_WhenIdDoesNotExist() throws Exception {
+    public void updateContact_ShouldReturnNotFound_WhenIdDoesNotExist() throws Exception {
         String jsonBody = objectMapper.writeValueAsString(contactDTO);
 
         ResultActions result = mockMvc.perform(put("/contacts/{id}", nonExistingId)
@@ -139,13 +139,13 @@ public class ContactControllerUnitTests {
     }
 
     @Test
-    void deleteContact_ShouldReturnNoContent_WhenIdExists() throws Exception {
+    public void deleteContact_ShouldReturnNoContent_WhenIdExists() throws Exception {
         ResultActions result = mockMvc.perform(delete("/contacts/{id}", existingId));
         result.andExpect(status().isNoContent());
     }
 
     @Test
-    void deleteContact_ShouldReturnNotFound_WhenIdDoesNotExist() throws Exception {
+    public void deleteContact_ShouldReturnNotFound_WhenIdDoesNotExist() throws Exception {
         ResultActions result = mockMvc.perform(delete("/contacts/{id}", nonExistingId));
         result.andExpect(status().isNotFound());
     }
