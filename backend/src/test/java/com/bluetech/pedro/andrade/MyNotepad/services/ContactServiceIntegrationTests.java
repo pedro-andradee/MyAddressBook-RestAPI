@@ -45,7 +45,7 @@ public class ContactServiceIntegrationTests {
     }
 
     @Test
-    public void insertNewContactShouldReturnContactDTO() {
+    public void insertNewContactShouldIncrementDBContactsCount() {
         contactService.insertNewContact(contactDTO);
         assertEquals(countTotalContacts + 1, contactRepository.count());
     }
@@ -82,7 +82,7 @@ public class ContactServiceIntegrationTests {
     }
 
     @Test
-    public void deleteContactShouldDoNothingWhenIdExists() {
+    public void deleteContactShouldDeleteContactWhenIdExists() {
         contactService.deleteContact(existingId);
         assertEquals(countTotalContacts - 1, contactRepository.count());
     }
