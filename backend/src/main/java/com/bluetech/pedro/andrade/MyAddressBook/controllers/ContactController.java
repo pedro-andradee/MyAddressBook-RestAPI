@@ -14,6 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/contacts")
+@CrossOrigin("*")
 public class ContactController {
 
     @Autowired
