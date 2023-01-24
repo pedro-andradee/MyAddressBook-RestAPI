@@ -44,7 +44,7 @@ npm run lint
 ## :bulb: Funcionalidades
 ### Lista de Contatos
 * Busca paginada de todos os contatos cadastrados: GET - /contacts
-* Busca paginada de contatos por nome: GET - /contacts?name=nome-desejado
+* Busca paginada de contatos por nome: GET - /contacts?name=nome
 * Cadastar novos contatos em sua lista: POST - /contacts
   ```json
     {
